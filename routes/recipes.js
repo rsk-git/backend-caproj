@@ -1,3 +1,4 @@
+import express from 'express';
 import { Router } from "express";
 import Recipe from "../models/Recipe.js";
 import User from "../models/User.js";
@@ -20,19 +21,6 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * POST /api/recipes/@ description create a new recipe
- */
-
-router.post("/", async (req, res) => {
-  try {
-    const recipe = await Recipe.create(req.body);
-    res.status(201).json(recipe);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
-/**
  * GET /api/recipes/:id
  */
 
@@ -44,6 +32,22 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+/**
+ * POST /api/recipes/@ description create a new recipe
+ */
+
+router.post("/", async (req, res) => {
+  // const [title, ingredients,instructions] = req.body
+  try {
+    const recipe = await Recipe.create(req.body);
+    res.status(201).json(recipe);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
 
 /**
  * PUT /api/recipes/:id

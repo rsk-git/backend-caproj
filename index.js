@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
-import recipesRouter from './routes/recipes.js'
+import recipesRouter from './routes/recipes.js';
+import usersRouter from './routes/users.js';
 
 dotenv.config();
 
@@ -21,12 +22,13 @@ console.error(error);
 app.use(morgan('dev')); // it's a logger
 app.use(express.json());// parse data to the body
 app.use(express.urlencoded({extended:true}));
-// cors allows backedn to talk to frontend in the same machine
+// cors allows backend to talk to frontend in the same machine
 app.use(cors());
 
 // ---Routes---
 
 app.use('/api/recipes', recipesRouter);
+app.use('/api/users', usersRouter);
 
 app.get('/', (req,res) =>{
     res.send('Welcome to recipes world')
