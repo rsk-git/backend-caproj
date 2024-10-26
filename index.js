@@ -6,6 +6,7 @@ import cors from "cors";
 import recipesRouter from './routes/recipes.js';
 import usersRouter from './routes/users.js';
 
+
 dotenv.config();
 
 const app = express();
@@ -17,6 +18,9 @@ try {await mongoose.connect(process.env.MONGODB_URI);
 }catch(error) {
 console.error(error);
 }
+
+// call the connectDB function
+connectDB();
 
 // ---Middlewares---
 app.use(morgan('dev')); // it's a logger
