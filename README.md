@@ -12,12 +12,18 @@ CORS: allows interaction between frontend and backend when hosted.
 * Mongoose: ODM library for MongDB and Node.js
 * dotenv: Loads environmental variables from .env to process.env
 * Axios: HTTP client for making requests to third-party API.
-*Node.js: Backend javascript runtime environment.
+*Node.js: Backend javascript runtime environment.The file extensions are .js 
 
 # how to install and run the project
 * Node.js: install Node.jsV12 or higher
 * MongoDB: set up MongoDB instance.
-* API Key: obtain API key from recipe data provider
+* API Key: obtain API key from recipe data provider.
+
+# Folders
+* controllers - define core application logic (handling requests)for each resouce, like recipeController.js and userController.js
+* models - Mongoose models define data schema for MongoDB collections. The recipeModel.js and userModel.js specifies validaton, data relatioships and structure.
+*routes - each route file, recipeRouter.js and userRouter.js, maps URL to controller methods and for different resources.
+* index.js - Main part of the server, connects with database, starts server and set up the express app.
 
 # usage of the project
 Users can search recipes, create own recipes and also safe to create login and authentication
