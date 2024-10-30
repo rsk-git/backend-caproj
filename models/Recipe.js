@@ -5,22 +5,17 @@ const recipeSchema = new mongoose.Schema(
         title: {
             type: String,
             required: true,
-            
-          },
-
-          ingredients: {
+        },
+        ingredients: {
+            type: [String], // Change to array of strings
+            required: true,
+        },
+        instructions: {
             type: String,
             required: true,
-            
-          },
-          instructions: {
-            type: String,
-            required: true,
-            
-          },
+        },
+    }
+);
 
-        }
-    )
-
-    const Recipe = new mongoose.model('Recipe', recipeSchema);
+const Recipe = mongoose.model('Recipe', recipeSchema);
 export default Recipe;

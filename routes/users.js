@@ -1,19 +1,20 @@
 import express from "express";
-
-
+import User from "../models/User.js";
+import {loginUser} from '../controllers/userController.js'
 
 const router = express.Router();
 
 /**
- * GET /api/users
+ * GET /api/users/
  */
 
 router.get('/', async(req,res) => {
     try {
         const users = await User.find();
-        res.join(users);
+        res.json(users);
     } catch (error) {
-        res.status(500).json({error: err.message});
+        console.error("Error fetching users:", error);
+        res.status(500).json({error: error.message});
     }
 });
 
@@ -25,8 +26,8 @@ router.get("/:id", async(req,res) => {
     try{
     const user = await User.findById(req.params.id);
     if(!user) return res.status(404).json({error: "User not found"});
-}catch (err){
-res.status(500).json({error: err.message});
+}catch (error){
+res.status(500).json({error: error.message});
 }
 });
 
@@ -37,20 +38,33 @@ router.post("/", async(req,res) =>{
     try {
         const user = await User.create(req.body);
         res.status(201).json(user);
-    } catch (err) {
-        res.status(400).json({error: err.message});
+    } catch (error) {
+        res.status(400).json({error: error.message});
     }
 });
+/**
+ * POST /api/users/login
+ */
+router.post('/login', async (req,res) => {
+    try {
+        await loginUser(req,res);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message:'Server error'});
+    }
+})
 
 /**
- * PUT /api/user/:id
+ * PUT /api/users/:id
  */
-router.put("/", async (req,res) =>{
+router.put("/:id", async (req,res) =>{
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true,});
-            if(updatedUser) res.json({updatedUser});
-    } catch (err) {
-        res.status(500).json({error: err.message});
+            if(!updatedUser) 
+                {return res.status(404).json({error: "User not found"})}
+            res.json(updatedUser);
+    } catch (error) {
+        res.status(500).json({error: error.message});
     }
 });
 
@@ -58,12 +72,12 @@ router.put("/", async (req,res) =>{
  * DELETE /api/user/:id
  */
 
-router.delete("/", async(req,res) =>{
+router.delete("/:id", async(req,res) =>{
     try {
         const user = await User.findByIdAndDelete(req.params.id);
         res.json({message: "User deleted"});
     } catch (error) {
-        res.status(500).json({error: err.message});
+        res.status(500).json({error: error.message});
     }
 })
 
