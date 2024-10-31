@@ -20,7 +20,8 @@ CORS: allows interaction between frontend and backend when hosted.
 * API Key: obtain API key from recipe data provider.
 
 # Folders
-* controllers - define core application logic (handling requests)for each resouce, like recipeController.js and userController.js
+* controllers - define core application logic (handling requests)for each resouce, like recipeController.js and userController.js.
+The authMiddleware.js file handles authentication in a Node.js/Express application, by checking the valid tokens.  So, only authorized users are allowed.It can be imported only is route files where needed.  For example, in the recipes.js.
 * models - Mongoose models define data schema for MongoDB collections. The recipeModel.js and userModel.js specifies validaton, data relatioships and structure.
 *routes - each route file, recipeRouter.js and userRouter.js, maps URL to controller methods and for different resources.
 * index.js - Main part of the server, connects with database, starts server and set up the express app.
