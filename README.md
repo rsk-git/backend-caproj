@@ -30,4 +30,4 @@ The authMiddleware.js file handles authentication in a Node.js/Express applicati
 Users can search recipes, create own recipes and also safe to create login and authentication
 
 # include credits - if followed any tutorials, certain materails etc.,
-followed Perscholas materials and stackflow.
+followed Perscholas materials, youtube and stackflow.
